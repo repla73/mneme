@@ -1,0 +1,33 @@
+schema_version: '1.0'
+platform_id: openclaw
+display_name: OpenClaw
+surface_kind: agent_runtime
+strategy: plugin
+status: design_ready
+evidence_checked_at: '2026-07-20'
+capabilities:
+  user_prompt_event: native
+  completed_round_event: native
+  tool_events: native
+  pre_compaction_event: native
+  post_compaction_event: native
+  exact_context_metrics: native
+  persistent_transcript: native
+  custom_commands: native
+  external_tool_api: native
+  local_extension_runtime: native
+  background_write: native
+  user_authorization_prompt: native
+capture_contract:
+- Use typed plugin hooks for ordered runtime integration and internal hooks for coarse
+  lifecycle side effects.
+- Capture message, tool, finalize, session, and compaction events without re-reading
+  the complete transcript every round.
+handover_contract:
+- Provide a skill and explicit command for human handovers.
+- Use compaction hooks for machine snapshots and context-risk warnings.
+limitations:
+- Hook handlers must remain bounded so they do not delay the gateway or amplify tool
+  loops.
+source_urls:
+- https://docs.openclaw.ai/automation/hooks

@@ -1,0 +1,33 @@
+schema_version: '1.0'
+platform_id: pi
+display_name: Pi Coding Agent
+surface_kind: coding_agent
+strategy: plugin
+status: design_ready
+evidence_checked_at: '2026-07-20'
+capabilities:
+  user_prompt_event: native
+  completed_round_event: native
+  tool_events: native
+  pre_compaction_event: native
+  post_compaction_event: native
+  exact_context_metrics: unknown
+  persistent_transcript: native
+  custom_commands: native
+  external_tool_api: native
+  local_extension_runtime: native
+  background_write: native
+  user_authorization_prompt: native
+capture_contract:
+- Implement a project-local TypeScript extension using Pi lifecycle events and session
+  persistence.
+- Append only normalized metadata to Pi session state; keep the authoritative ledger
+  in the Mneme service.
+handover_contract:
+- Register a /mneme-handover command with an explicit confirmation step.
+- Use compaction interception for machine snapshots, not automatic human output.
+limitations:
+- Third-party compatibility hook packages are optional; the canonical adapter should
+  use Pi native extension APIs.
+source_urls:
+- https://pi.dev/docs/latest/extensions

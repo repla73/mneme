@@ -1,0 +1,48 @@
+{
+  "$defs": {
+    "PrivacyClass": {
+      "enum": [
+        "public",
+        "project_internal",
+        "sensitive",
+        "secret"
+      ],
+      "title": "PrivacyClass",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "authorized_by_user": {
+      "default": false,
+      "title": "Authorized By User",
+      "type": "boolean"
+    },
+    "reason": {
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "target_platform": {
+      "default": "generic",
+      "title": "Target Platform",
+      "type": "string"
+    },
+    "max_privacy_class": {
+      "$ref": "#/$defs/PrivacyClass",
+      "default": "project_internal"
+    },
+    "include_recent_events": {
+      "default": 20,
+      "maximum": 500,
+      "minimum": 0,
+      "title": "Include Recent Events",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "reason"
+  ],
+  "title": "HandoverRequest",
+  "type": "object"
+}

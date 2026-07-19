@@ -1,0 +1,70 @@
+[
+  {
+    "project_id": "demo",
+    "session_id": "chat-001",
+    "round_id": "chat-001-round-0001",
+    "event_type": "decision_accepted",
+    "subject": "mneme architecture",
+    "summary": "Use an immutable semantic event ledger with derived current state.",
+    "semantic_delta": {
+      "before": "Continuity relied on final-session summaries.",
+      "after": "Continuity is captured as typed semantic state changes during the session."
+    },
+    "why": {
+      "trigger": "Long sessions lose or distort distant context.",
+      "rationale": [
+        {
+          "text": "A fresh session must recover decisions and their reasons without replaying the full transcript.",
+          "status": "explicit",
+          "evidence_refs": ["conversation:user:1"],
+          "confidence": 1.0
+        }
+      ],
+      "alternatives_rejected": [],
+      "consequences": ["Current state is rebuilt from the event ledger."]
+    },
+    "constraints": ["Do not overwrite historical events."],
+    "authority": {
+      "actor": "user",
+      "level": "explicit_user_approval",
+      "source_ref": "conversation:user:1"
+    },
+    "provenance": [
+      {
+        "ref_id": "conversation:user:1",
+        "kind": "conversation_message",
+        "locator": "user turn 1"
+      }
+    ],
+    "confidence": 1.0,
+    "privacy_class": "project_internal",
+    "supersedes": [],
+    "state_operations": [
+      {
+        "action": "set",
+        "section": "mission",
+        "key": "mneme",
+        "value": {
+          "summary": "Preserve the semantic reasons governing long workflows.",
+          "details": {},
+          "rationale": "Fresh sessions must continue correctly without replaying full transcripts.",
+          "status": "active",
+          "confidence": 1.0
+        }
+      },
+      {
+        "action": "upsert",
+        "section": "active_decisions",
+        "key": "immutable-ledger",
+        "value": {
+          "summary": "Record semantic state changes in an append-only ledger.",
+          "details": {},
+          "rationale": "Historical rationale must remain auditable and supersedable.",
+          "status": "active",
+          "confidence": 1.0
+        }
+      }
+    ],
+    "tags": ["architecture", "ratified"]
+  }
+]

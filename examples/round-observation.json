@@ -1,0 +1,10 @@
+{
+  "project_id": "demo",
+  "session_id": "chat-001",
+  "round_id": "chat-001-round-0001",
+  "user_text": "Use an immutable event ledger and compile handovers only after approval.",
+  "assistant_text": "Architecture accepted and translated into typed contracts.",
+  "tool_evidence_refs": [],
+  "user_message_ref": "conversation:user:1",
+  "assistant_message_ref": "conversation:assistant:1"
+}

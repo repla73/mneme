@@ -1,0 +1,56 @@
+{
+  "$defs": {
+    "RiskLevel": {
+      "enum": [
+        "green",
+        "yellow",
+        "red"
+      ],
+      "title": "RiskLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "level": {
+      "$ref": "#/$defs/RiskLevel"
+    },
+    "score": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Score",
+      "type": "integer"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommendation": {
+      "title": "Recommendation",
+      "type": "string"
+    },
+    "authoritative_usage_ratio": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Authoritative Usage Ratio"
+    }
+  },
+  "required": [
+    "level",
+    "score",
+    "reasons",
+    "recommendation"
+  ],
+  "title": "RiskReport",
+  "type": "object"
+}

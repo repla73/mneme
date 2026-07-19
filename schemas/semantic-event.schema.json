@@ -1,0 +1,545 @@
+{
+  "$defs": {
+    "Authority": {
+      "additionalProperties": false,
+      "properties": {
+        "actor": {
+          "minLength": 1,
+          "title": "Actor",
+          "type": "string"
+        },
+        "level": {
+          "$ref": "#/$defs/AuthorityLevel"
+        },
+        "source_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Ref"
+        }
+      },
+      "required": [
+        "actor",
+        "level"
+      ],
+      "title": "Authority",
+      "type": "object"
+    },
+    "AuthorityLevel": {
+      "enum": [
+        "explicit_user_approval",
+        "user_instruction",
+        "canonical_artifact",
+        "verified_evidence",
+        "accepted_decision",
+        "assistant_proposal",
+        "assistant_inference"
+      ],
+      "title": "AuthorityLevel",
+      "type": "string"
+    },
+    "EventType": {
+      "enum": [
+        "objective_changed",
+        "scope_changed",
+        "constraint_added",
+        "constraint_removed",
+        "decision_proposed",
+        "decision_accepted",
+        "decision_rejected",
+        "decision_superseded",
+        "clarification_resolved",
+        "assumption_recorded",
+        "assumption_invalidated",
+        "evidence_added",
+        "authority_changed",
+        "blocker_opened",
+        "blocker_resolved",
+        "action_authorized",
+        "action_completed",
+        "correction_issued",
+        "risk_identified",
+        "risk_resolved",
+        "continuity_warning"
+      ],
+      "title": "EventType",
+      "type": "string"
+    },
+    "PrivacyClass": {
+      "enum": [
+        "public",
+        "project_internal",
+        "sensitive",
+        "secret"
+      ],
+      "title": "PrivacyClass",
+      "type": "string"
+    },
+    "ProvenanceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "privacy_class": {
+          "$ref": "#/$defs/PrivacyClass",
+          "default": "project_internal"
+        },
+        "ref_id": {
+          "minLength": 1,
+          "title": "Ref Id",
+          "type": "string"
+        },
+        "kind": {
+          "minLength": 1,
+          "title": "Kind",
+          "type": "string"
+        },
+        "locator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Locator"
+        },
+        "content_hash": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Hash"
+        },
+        "excerpt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Excerpt"
+        }
+      },
+      "required": [
+        "ref_id",
+        "kind"
+      ],
+      "title": "ProvenanceRef",
+      "type": "object"
+    },
+    "RationaleClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/RationaleStatus"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "confidence": {
+          "default": 1.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        }
+      },
+      "required": [
+        "text",
+        "status"
+      ],
+      "title": "RationaleClaim",
+      "type": "object"
+    },
+    "RationaleStatus": {
+      "enum": [
+        "explicit",
+        "derived",
+        "inferred"
+      ],
+      "title": "RationaleStatus",
+      "type": "string"
+    },
+    "RejectedAlternative": {
+      "additionalProperties": false,
+      "properties": {
+        "alternative": {
+          "minLength": 1,
+          "title": "Alternative",
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "alternative",
+        "reason"
+      ],
+      "title": "RejectedAlternative",
+      "type": "object"
+    },
+    "SemanticDelta": {
+      "additionalProperties": false,
+      "properties": {
+        "before": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Before"
+        },
+        "after": {
+          "minLength": 1,
+          "title": "After",
+          "type": "string"
+        }
+      },
+      "required": [
+        "after"
+      ],
+      "title": "SemanticDelta",
+      "type": "object"
+    },
+    "StateAction": {
+      "enum": [
+        "set",
+        "upsert",
+        "remove"
+      ],
+      "title": "StateAction",
+      "type": "string"
+    },
+    "StateOperation": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/StateAction"
+        },
+        "section": {
+          "$ref": "#/$defs/StateSection"
+        },
+        "key": {
+          "minLength": 1,
+          "title": "Key",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StateValue"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "action",
+        "section",
+        "key"
+      ],
+      "title": "StateOperation",
+      "type": "object"
+    },
+    "StateSection": {
+      "enum": [
+        "mission",
+        "current_phase",
+        "scope_included",
+        "scope_excluded",
+        "authority_sources",
+        "active_decisions",
+        "constraints",
+        "verified_facts",
+        "assumptions",
+        "rejected_approaches",
+        "open_questions",
+        "blockers",
+        "risks",
+        "completed_outcomes",
+        "next_authorized_action",
+        "continuity_warnings"
+      ],
+      "title": "StateSection",
+      "type": "string"
+    },
+    "StateValue": {
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": true,
+          "title": "Details",
+          "type": "object"
+        },
+        "rationale": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rationale"
+        },
+        "status": {
+          "default": "active",
+          "title": "Status",
+          "type": "string"
+        },
+        "confidence": {
+          "default": 1.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        }
+      },
+      "required": [
+        "summary"
+      ],
+      "title": "StateValue",
+      "type": "object"
+    },
+    "WhyRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "trigger": {
+          "minLength": 1,
+          "title": "Trigger",
+          "type": "string"
+        },
+        "rationale": {
+          "items": {
+            "$ref": "#/$defs/RationaleClaim"
+          },
+          "minItems": 1,
+          "title": "Rationale",
+          "type": "array"
+        },
+        "alternatives_rejected": {
+          "items": {
+            "$ref": "#/$defs/RejectedAlternative"
+          },
+          "title": "Alternatives Rejected",
+          "type": "array"
+        },
+        "consequences": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Consequences",
+          "type": "array"
+        }
+      },
+      "required": [
+        "trigger",
+        "rationale"
+      ],
+      "title": "WhyRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "project_id": {
+      "minLength": 1,
+      "title": "Project Id",
+      "type": "string"
+    },
+    "session_id": {
+      "minLength": 1,
+      "title": "Session Id",
+      "type": "string"
+    },
+    "round_id": {
+      "minLength": 1,
+      "title": "Round Id",
+      "type": "string"
+    },
+    "event_type": {
+      "$ref": "#/$defs/EventType"
+    },
+    "subject": {
+      "minLength": 1,
+      "title": "Subject",
+      "type": "string"
+    },
+    "summary": {
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    },
+    "semantic_delta": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SemanticDelta"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "why": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/WhyRecord"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "constraints": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraints",
+      "type": "array"
+    },
+    "authority": {
+      "$ref": "#/$defs/Authority"
+    },
+    "provenance": {
+      "items": {
+        "$ref": "#/$defs/ProvenanceRef"
+      },
+      "title": "Provenance",
+      "type": "array"
+    },
+    "confidence": {
+      "default": 1.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "privacy_class": {
+      "$ref": "#/$defs/PrivacyClass",
+      "default": "project_internal"
+    },
+    "supersedes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Supersedes",
+      "type": "array"
+    },
+    "state_operations": {
+      "items": {
+        "$ref": "#/$defs/StateOperation"
+      },
+      "title": "State Operations",
+      "type": "array"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "event_id": {
+      "minLength": 1,
+      "title": "Event Id",
+      "type": "string"
+    },
+    "sequence": {
+      "minimum": 1,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "previous_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Hash"
+    },
+    "content_hash": {
+      "maxLength": 64,
+      "minLength": 64,
+      "title": "Content Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "project_id",
+    "session_id",
+    "round_id",
+    "event_type",
+    "subject",
+    "summary",
+    "authority",
+    "event_id",
+    "sequence",
+    "created_at",
+    "content_hash"
+  ],
+  "title": "SemanticEvent",
+  "type": "object"
+}

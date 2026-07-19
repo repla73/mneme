@@ -1,0 +1,12 @@
+{
+  "used_tokens": 160000,
+  "context_window": 200000,
+  "token_metrics_authoritative": true,
+  "compaction_count": 1,
+  "rounds_since_checkpoint": 95,
+  "accumulated_tool_result_chars": 250000,
+  "reopened_settled_questions": 0,
+  "forgotten_constraints": 0,
+  "user_memory_corrections": 1,
+  "unresolved_state_conflicts": 0
+}

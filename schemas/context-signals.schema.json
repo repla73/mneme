@@ -1,0 +1,80 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "used_tokens": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Used Tokens"
+    },
+    "context_window": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Context Window"
+    },
+    "token_metrics_authoritative": {
+      "default": false,
+      "title": "Token Metrics Authoritative",
+      "type": "boolean"
+    },
+    "compaction_count": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Compaction Count",
+      "type": "integer"
+    },
+    "rounds_since_checkpoint": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Rounds Since Checkpoint",
+      "type": "integer"
+    },
+    "accumulated_tool_result_chars": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Accumulated Tool Result Chars",
+      "type": "integer"
+    },
+    "reopened_settled_questions": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Reopened Settled Questions",
+      "type": "integer"
+    },
+    "forgotten_constraints": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Forgotten Constraints",
+      "type": "integer"
+    },
+    "user_memory_corrections": {
+      "default": 0,
+      "minimum": 0,
+      "title": "User Memory Corrections",
+      "type": "integer"
+    },
+    "unresolved_state_conflicts": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Unresolved State Conflicts",
+      "type": "integer"
+    }
+  },
+  "title": "ContextSignals",
+  "type": "object"
+}

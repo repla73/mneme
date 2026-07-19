@@ -1,0 +1,65 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "round_id": {
+      "title": "Round Id",
+      "type": "string"
+    },
+    "user_text": {
+      "title": "User Text",
+      "type": "string"
+    },
+    "assistant_text": {
+      "title": "Assistant Text",
+      "type": "string"
+    },
+    "tool_evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tool Evidence Refs",
+      "type": "array"
+    },
+    "user_message_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "User Message Ref"
+    },
+    "assistant_message_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Assistant Message Ref"
+    }
+  },
+  "required": [
+    "project_id",
+    "session_id",
+    "round_id",
+    "user_text",
+    "assistant_text"
+  ],
+  "title": "RoundObservation",
+  "type": "object"
+}

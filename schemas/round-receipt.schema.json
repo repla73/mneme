@@ -1,0 +1,118 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "project_id": {
+      "minLength": 1,
+      "title": "Project Id",
+      "type": "string"
+    },
+    "session_id": {
+      "minLength": 1,
+      "title": "Session Id",
+      "type": "string"
+    },
+    "round_id": {
+      "minLength": 1,
+      "title": "Round Id",
+      "type": "string"
+    },
+    "source_hash": {
+      "maxLength": 64,
+      "minLength": 64,
+      "title": "Source Hash",
+      "type": "string"
+    },
+    "semantic_event_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Semantic Event Ids",
+      "type": "array"
+    },
+    "user_message_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "User Message Ref"
+    },
+    "assistant_message_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Assistant Message Ref"
+    },
+    "observer_version": {
+      "default": "generic-adapter/0.1",
+      "title": "Observer Version",
+      "type": "string"
+    },
+    "notes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Notes"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sequence": {
+      "minimum": 1,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "previous_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Hash"
+    },
+    "content_hash": {
+      "maxLength": 64,
+      "minLength": 64,
+      "title": "Content Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "project_id",
+    "session_id",
+    "round_id",
+    "source_hash",
+    "sequence",
+    "completed_at",
+    "content_hash"
+  ],
+  "title": "RoundReceipt",
+  "type": "object"
+}

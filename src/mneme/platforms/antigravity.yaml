@@ -1,0 +1,35 @@
+schema_version: '1.0'
+platform_id: antigravity
+display_name: Google Antigravity
+surface_kind: coding_agent
+strategy: native_hooks
+status: design_ready
+evidence_checked_at: '2026-07-20'
+capabilities:
+  user_prompt_event: native
+  completed_round_event: native
+  tool_events: native
+  pre_compaction_event: native
+  post_compaction_event: unknown
+  exact_context_metrics: unknown
+  persistent_transcript: native
+  custom_commands: native
+  external_tool_api: native
+  local_extension_runtime: native
+  background_write: native
+  user_authorization_prompt: cooperative
+capture_contract:
+- Use JSON command hooks and the persistent transcript path to normalize rounds.
+- Use Antigravity skills for explicit commands and the SDK only when programmatic
+  orchestration is required.
+handover_contract:
+- Compile on explicit user command or an agent recommendation accepted by the user.
+- Treat transcript and artifact paths as provenance locators, not content to inject
+  wholesale.
+limitations:
+- Hook availability differs across Antigravity surfaces; the adapter must bind to
+  the selected product and version.
+source_urls:
+- https://antigravity.google/docs/home
+- https://antigravity.google/docs/hooks?app=antigravity
+- https://antigravity.google/docs/skills?app=antigravity-ide

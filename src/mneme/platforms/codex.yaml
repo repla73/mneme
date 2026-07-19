@@ -1,0 +1,35 @@
+schema_version: '1.0'
+platform_id: codex
+display_name: OpenAI Codex
+surface_kind: coding_agent
+strategy: native_hooks
+status: design_ready
+evidence_checked_at: '2026-07-20'
+capabilities:
+  user_prompt_event: native
+  completed_round_event: native
+  tool_events: native
+  pre_compaction_event: native
+  post_compaction_event: native
+  exact_context_metrics: unknown
+  persistent_transcript: native
+  custom_commands: native
+  external_tool_api: native
+  local_extension_runtime: native
+  background_write: native
+  user_authorization_prompt: cooperative
+capture_contract:
+- Use UserPromptSubmit, tool, Stop, PreCompact, and PostCompact hooks to assemble
+  a complete round.
+- Write normalized observations to the local Mneme service asynchronously where hook
+  semantics permit.
+handover_contract:
+- Ship a Codex skill and command that requests an authorized handover.
+- Use PreCompact only for machine safety snapshots; do not automatically emit a human
+  handover.
+limitations:
+- Multiple matching command hooks may run concurrently, so ingestion must be idempotent.
+source_urls:
+- https://learn.chatgpt.com/docs/hooks
+- https://learn.chatgpt.com/docs/agent-configuration/agents-md
+- https://learn.chatgpt.com/docs/build-skills

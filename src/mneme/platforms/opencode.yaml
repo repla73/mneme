@@ -1,0 +1,32 @@
+schema_version: '1.0'
+platform_id: opencode
+display_name: OpenCode
+surface_kind: coding_agent
+strategy: plugin
+status: design_ready
+evidence_checked_at: '2026-07-20'
+capabilities:
+  user_prompt_event: native
+  completed_round_event: native
+  tool_events: native
+  pre_compaction_event: native
+  post_compaction_event: unknown
+  exact_context_metrics: unknown
+  persistent_transcript: native
+  custom_commands: native
+  external_tool_api: native
+  local_extension_runtime: native
+  background_write: native
+  user_authorization_prompt: cooperative
+capture_contract:
+- Implement a TypeScript plugin using session, message, tool, and compaction events.
+- Load project-local plugins only from trusted workspaces.
+handover_contract:
+- Expose an explicit command or custom tool for handover compilation.
+- Inject only the bounded current-state capsule during compaction.
+limitations:
+- Experimental compaction hooks may change; isolate them behind a versioned adapter
+  contract.
+source_urls:
+- https://opencode.ai/docs/plugins/
+- https://opencode.ai/docs/config/

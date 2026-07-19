@@ -1,0 +1,34 @@
+schema_version: '1.0'
+platform_id: cursor
+display_name: Cursor
+surface_kind: coding_agent
+strategy: hybrid
+status: design_ready
+evidence_checked_at: '2026-07-20'
+capabilities:
+  user_prompt_event: native
+  completed_round_event: native
+  tool_events: native
+  pre_compaction_event: unknown
+  post_compaction_event: unknown
+  exact_context_metrics: unknown
+  persistent_transcript: native
+  custom_commands: native
+  external_tool_api: native
+  local_extension_runtime: native
+  background_write: native
+  user_authorization_prompt: cooperative
+capture_contract:
+- Prefer Cursor hooks where available; support CLI stream-json as a deterministic
+  fallback.
+- Use session IDs and terminal result events to deduplicate completed rounds.
+handover_contract:
+- Provide a Cursor command and rule that requests an authorized handover.
+- Use /compress only as a platform action; Mneme remains the durable record.
+limitations:
+- Hook configuration maturity and scope can vary between Cursor IDE, CLI, and organization-managed
+  deployments.
+source_urls:
+- https://cursor.com/blog/hooks-partners
+- https://docs.cursor.com/en/cli/reference/output-format
+- https://docs.cursor.com/en/agent/chat/commands

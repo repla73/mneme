@@ -1,0 +1,35 @@
+schema_version: '1.0'
+platform_id: gemini-web
+display_name: Gemini Web
+surface_kind: web
+strategy: browser_companion
+status: design_ready
+evidence_checked_at: '2026-07-20'
+capabilities:
+  user_prompt_event: companion
+  completed_round_event: companion
+  tool_events: companion
+  pre_compaction_event: absent
+  post_compaction_event: absent
+  exact_context_metrics: absent
+  persistent_transcript: cooperative
+  custom_commands: cooperative
+  external_tool_api: cooperative
+  local_extension_runtime: companion
+  background_write: companion
+  user_authorization_prompt: cooperative
+capture_contract:
+- Use the shared browser companion with a Gemini-specific site observer.
+- Use Gems or Gemini skills only as the instruction and user-trigger surface, not
+  as durable event storage.
+handover_contract:
+- Provide an explicit handover skill or Gem workflow.
+- Persist the generated package in Mneme before injecting a bounded bootstrap into
+  a fresh chat.
+limitations:
+- No verified native post-turn hook is exposed by Gemini Web.
+- Gem and account instruction availability varies by account type and surface.
+source_urls:
+- https://support.google.com/gemini/answer/15236321
+- https://support.google.com/gemini/answer/16598625
+- https://support.google.com/gemini/answer/15235603

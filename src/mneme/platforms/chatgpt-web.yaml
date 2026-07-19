@@ -1,0 +1,37 @@
+schema_version: '1.0'
+platform_id: chatgpt-web
+display_name: ChatGPT Web
+surface_kind: web
+strategy: browser_companion
+status: design_ready
+evidence_checked_at: '2026-07-20'
+capabilities:
+  user_prompt_event: companion
+  completed_round_event: companion
+  tool_events: companion
+  pre_compaction_event: absent
+  post_compaction_event: absent
+  exact_context_metrics: absent
+  persistent_transcript: cooperative
+  custom_commands: cooperative
+  external_tool_api: cooperative
+  local_extension_runtime: companion
+  background_write: companion
+  user_authorization_prompt: cooperative
+capture_contract:
+- A local browser companion observes a completed user/assistant round and sends a
+  normalized observation to the local Mneme service.
+- ChatGPT Projects, memory, skills, apps, or actions may assist retrieval and commands
+  but are not the authoritative ledger.
+handover_contract:
+- Expose an explicit checkpoint command through the companion or skill layer.
+- The risk sentinel may recommend a handover but cannot claim an exact remaining-context
+  percentage without an authoritative metric.
+limitations:
+- No documented native lifecycle callback guarantees an external write after every
+  completed ChatGPT Web round.
+- Browser DOM integration is version-sensitive and requires explicit local user consent.
+source_urls:
+- https://help.openai.com/en/articles/10169521-projects-in-chatgpt
+- https://help.openai.com/en/articles/8554407-gpts-in-chatgpt
+- https://help.openai.com/en/articles/9442513-configuring-actions-in-gpts

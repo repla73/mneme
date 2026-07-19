@@ -1,0 +1,182 @@
+{
+  "$defs": {
+    "AdapterStrategy": {
+      "enum": [
+        "browser_companion",
+        "native_hooks",
+        "plugin",
+        "cli_stream",
+        "skill_only",
+        "hybrid"
+      ],
+      "title": "AdapterStrategy",
+      "type": "string"
+    },
+    "CapabilitySet": {
+      "additionalProperties": false,
+      "properties": {
+        "user_prompt_event": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "completed_round_event": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "tool_events": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "pre_compaction_event": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "post_compaction_event": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "exact_context_metrics": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "persistent_transcript": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "custom_commands": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "external_tool_api": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "local_extension_runtime": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "background_write": {
+          "$ref": "#/$defs/SupportLevel"
+        },
+        "user_authorization_prompt": {
+          "$ref": "#/$defs/SupportLevel"
+        }
+      },
+      "required": [
+        "user_prompt_event",
+        "completed_round_event",
+        "tool_events",
+        "pre_compaction_event",
+        "post_compaction_event",
+        "exact_context_metrics",
+        "persistent_transcript",
+        "custom_commands",
+        "external_tool_api",
+        "local_extension_runtime",
+        "background_write",
+        "user_authorization_prompt"
+      ],
+      "title": "CapabilitySet",
+      "type": "object"
+    },
+    "ImplementationStatus": {
+      "enum": [
+        "planned",
+        "design_ready",
+        "implementing",
+        "available",
+        "blocked"
+      ],
+      "title": "ImplementationStatus",
+      "type": "string"
+    },
+    "SupportLevel": {
+      "enum": [
+        "native",
+        "companion",
+        "cooperative",
+        "absent",
+        "unknown"
+      ],
+      "title": "SupportLevel",
+      "type": "string"
+    },
+    "SurfaceKind": {
+      "enum": [
+        "web",
+        "coding_agent",
+        "agent_runtime"
+      ],
+      "title": "SurfaceKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "platform_id": {
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "title": "Platform Id",
+      "type": "string"
+    },
+    "display_name": {
+      "minLength": 1,
+      "title": "Display Name",
+      "type": "string"
+    },
+    "surface_kind": {
+      "$ref": "#/$defs/SurfaceKind"
+    },
+    "strategy": {
+      "$ref": "#/$defs/AdapterStrategy"
+    },
+    "status": {
+      "$ref": "#/$defs/ImplementationStatus"
+    },
+    "evidence_checked_at": {
+      "format": "date",
+      "title": "Evidence Checked At",
+      "type": "string"
+    },
+    "capabilities": {
+      "$ref": "#/$defs/CapabilitySet"
+    },
+    "capture_contract": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Capture Contract",
+      "type": "array"
+    },
+    "handover_contract": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Handover Contract",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "source_urls": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Urls",
+      "type": "array"
+    }
+  },
+  "required": [
+    "platform_id",
+    "display_name",
+    "surface_kind",
+    "strategy",
+    "status",
+    "evidence_checked_at",
+    "capabilities",
+    "capture_contract",
+    "handover_contract"
+  ],
+  "title": "PlatformManifest",
+  "type": "object"
+}

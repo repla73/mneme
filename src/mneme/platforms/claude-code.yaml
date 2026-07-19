@@ -1,0 +1,32 @@
+schema_version: '1.0'
+platform_id: claude-code
+display_name: Claude Code
+surface_kind: coding_agent
+strategy: native_hooks
+status: design_ready
+evidence_checked_at: '2026-07-20'
+capabilities:
+  user_prompt_event: native
+  completed_round_event: native
+  tool_events: native
+  pre_compaction_event: native
+  post_compaction_event: native
+  exact_context_metrics: unknown
+  persistent_transcript: native
+  custom_commands: native
+  external_tool_api: native
+  local_extension_runtime: native
+  background_write: native
+  user_authorization_prompt: native
+capture_contract:
+- Use lifecycle hooks to collect user prompts, tool evidence, stop events, compaction,
+  and session termination.
+- Prefer HTTP or command hooks with stable JSON contracts and idempotent round IDs.
+handover_contract:
+- Provide a skill or command for explicit compilation.
+- Use prompt or agent hooks only for bounded extraction and authorization checks.
+limitations:
+- Hook execution can affect agent latency; heavy extraction must run asynchronously
+  or out of process.
+source_urls:
+- https://code.claude.com/docs/en/hooks
