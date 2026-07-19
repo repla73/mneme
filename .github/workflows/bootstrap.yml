@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - bootstrap/mneme.tar.gz.b64
+      - bootstrap/run
 
 permissions:
   contents: write
@@ -21,7 +21,7 @@ jobs:
           python-version: "3.12"
       - name: Expand validated source payload
         run: |
-          base64 --decode bootstrap/mneme.tar.gz.b64 > /tmp/mneme.tar.gz
+          cat bootstrap/parts/* | base64 --decode > /tmp/mneme.tar.gz
           test "$(sha256sum /tmp/mneme.tar.gz | cut -d' ' -f1)" = "ea521908775b7d3d1471840510d5643dbfe17a5ebfcdd9ffabc393f9d8cb6ece"
           tar -xzf /tmp/mneme.tar.gz
           rm -rf bootstrap .github/workflows/bootstrap.yml
